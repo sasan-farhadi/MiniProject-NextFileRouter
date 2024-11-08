@@ -4,6 +4,8 @@ import styles from "./LoginForm.module.css"
 import { login } from "../../services/auth"
 import { useState } from "react"
 
+import toast, { Toaster } from "react-hot-toast"
+
 const LoginForm = () => {
     const [form, setForm] = useState({ username: "", password: "" })
     const { username, password } = form
@@ -15,7 +17,12 @@ const LoginForm = () => {
     const loginHandler = async (e) => {
         e.preventDefault()
         const { response, error } = await login(username, password)
-        console.log({ response, error })
+        if (response) {
+            toast.success("ورود با موفقیت انجام شد")
+        } else if (error) {
+            toast.error("نام کاربری یا رمز عبور اشتباه است")
+            return
+        }
     }
     return (
         <form className={styles.form} onChange={changeHanlder} onSubmit={loginHandler}>
@@ -42,6 +49,7 @@ const LoginForm = () => {
             </div>
 
             <button type='submit' >ورود</button>
+            <Toaster />
             <Link href="/register">ایجاد حساب کاربری؟</Link>
         </form>
     )
