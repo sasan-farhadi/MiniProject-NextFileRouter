@@ -1,0 +1,87 @@
+.addProducts {
+    display: flex;
+    width: 1140px;
+    align-items: center;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 45px;
+}
+
+.addProducts h2 {
+    font-weight: 300;
+}
+
+.addProducts div:first-child {
+    display: flex;
+    gap: 10px;
+}
+
+.addProducts button {
+    width: 132px;
+    height: 45px;
+    border-radius: 15px;
+    border: none;
+    background-color: #55a3f0;
+    color: #fff;
+    font-weight: 300;
+    cursor: pointer;
+    opacity: .9;
+    transition: all .2s ease-in-out;
+}
+
+.addProducts button:hover {
+    opacity: 1;
+}
+
+.list {
+    width: 1140px;
+    height: 670px;
+    background: #fff;
+    border-radius: 30px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.title {
+    display: flex;
+    padding: 0 40px 0 0;
+    height: 70px;
+    align-items: center;
+    text-align: right;
+    background-color: #E4E4E4;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.title h4 {
+    width: 30%;
+    font-weight: 300;
+}
+
+.item {
+    display: flex;
+    text-align: right;
+    padding: 0 40px 0 0;
+    height: 60px;
+    font-size: .5rem;
+    align-items: center;
+    border-bottom: 1px solid #E4E4E4;
+}
+
+.list .item:last-child {
+    border: none;
+}
+
+.item p {
+    width: 30%;
+    font-size: .8rem;
+}
+
+.item p:last-child {
+    text-align: center;
+}
+
+.item img {
+    cursor: pointer;
+    margin-right: 15px;
+}

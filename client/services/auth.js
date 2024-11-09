@@ -12,6 +12,6 @@ const login = async (username, password) => {
     }
 }
 
-getCookie("token")
+// getCookie("token")
 
 export { register, login }

@@ -1,15 +1,15 @@
 import Link from "next/link"
-
-import styles from "./RegisterForm.module.css"
 import { useState } from "react"
 import { useMutation } from "@tanstack/react-query"
+import styles from "./RegisterForm.module.css"
 import { register } from "../../services/auth"
-import toast, { Toaster } from "react-hot-toast"
+import { useRouter } from "next/router"
 
+import toast, { Toaster } from "react-hot-toast"
 const RegisterForm = () => {
+    const router = useRouter()
     const [form, setForm] = useState({ username: "", password: "", repassword: "" })
     const { username, password, repassword } = form
-
     const { mutate } = useMutation(register)
 
     const changeHanlder = e => {
@@ -23,6 +23,7 @@ const RegisterForm = () => {
             onSuccess: () => {
                 toast.success(`کاربر ${username} با موفقیت ایجاد شد`)
                 setForm({ username: "", password: "", repassword: "" })
+                router.push("/login")
             },
             onError: (err) => {
                 const errStatus = err.response.data.message

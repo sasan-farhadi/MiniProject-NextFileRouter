@@ -5,8 +5,13 @@ import { login } from "../../services/auth"
 import { useState } from "react"
 
 import toast, { Toaster } from "react-hot-toast"
+import { setCookie } from "../../utils/cookie"
+
+import { useRouter } from "next/router"
+
 
 const LoginForm = () => {
+    const router = useRouter()
     const [form, setForm] = useState({ username: "", password: "" })
     const { username, password } = form
 
@@ -19,6 +24,8 @@ const LoginForm = () => {
         const { response, error } = await login(username, password)
         if (response) {
             toast.success("ورود با موفقیت انجام شد")
+            setCookie(response.data)
+            router.push("/admin")
         } else if (error) {
             toast.error("نام کاربری یا رمز عبور اشتباه است")
             return
