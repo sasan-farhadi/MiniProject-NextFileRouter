@@ -1,9 +1,35 @@
+import { useState } from "react"
 import { sp, e2p } from "../../helper/number"
 import Pagination from "../module/pagination"
 import styles from "./ProductsList.module.css"
+import { useQuery } from "@tanstack/react-query"
+import { allProducts } from "../../services/products"
+import EditProduct from "./editProduct"
+import DeleteProduct from "./deleteProduct"
 
-const ProductsList = ({ data, setSelectPage, selectPage , setShowAddProductModal }) => {
+const ProductsList = ({ data, setSelectPage, selectPage, setShowAddProductModal }) => {
     const totalPage = data?.data.totalPages
+
+    const { data: allData } = useQuery(["get-products"], allProducts)
+
+
+    //delete handler
+    const [deleteModal, setDeleteModal] = useState(null)
+    const [selectProductId, setSelectProductId] = useState("")
+    const deleteHandler = id => {
+        setDeleteModal(true)
+        setSelectProductId(id)
+    }
+
+
+    //edit handler
+    const [editModal, setEditModal] = useState(null)
+    const [editRecord, setEditRecord] = useState([])
+    const editHandler = id => {
+        const res = allData?.data.data.find(x => x.id === id)
+        setEditModal(true)
+        setEditRecord(res)
+    }
     return (
         <>
             <div className={styles.addProducts}>
@@ -11,7 +37,7 @@ const ProductsList = ({ data, setSelectPage, selectPage , setShowAddProductModal
                     <img src="setting.svg" alt="" />
                     <h2>مدیریت کالا</h2>
                 </div>
-                <div><button onClick={()=> setShowAddProductModal(true)}>افزودن محصول</button></div>
+                <div><button onClick={() => setShowAddProductModal(true)}>افزودن محصول</button></div>
             </div>
             <div className={styles.list}>
                 <div className={styles.title}>
@@ -39,8 +65,8 @@ const ProductsList = ({ data, setSelectPage, selectPage , setShowAddProductModal
                 }
             </div>
             <Pagination setSelectPage={setSelectPage} selectPage={selectPage} totalPage={totalPage} />
-            {/* {!!deleteModal && <DeleteProductsModal setDeleteModal={setDeleteModal} selectProductId={selectProductId} />}
-            {!!editModal && <EditProductModal setEditModal={setEditModal} editRecord={editRecord} />} */}
+            {!!deleteModal && <DeleteProduct setDeleteModal={setDeleteModal} selectProductId={selectProductId} />}
+            {!!editModal && <EditProduct setEditModal={setEditModal} editRecord={editRecord} />}
         </>
     )
 }

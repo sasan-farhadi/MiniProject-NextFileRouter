@@ -3,17 +3,12 @@ const limit = 10
 
 const products = (page) => {
     const pageNumber = page.queryKey[1]
-
     return (
         api.get(`products?page=${pageNumber}&limit=${limit}`)
     )
 }
 
-const allProducts = () => {
-    return (
-        api.get(`products?limit=1000`)
-    )
-}
+const allProducts = () => api.get(`products?limit=1000`)
 
 const addProduct = (data) => api.post(`products`, data)
 

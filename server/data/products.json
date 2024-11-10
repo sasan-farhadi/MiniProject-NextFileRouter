@@ -1,13 +1,13 @@
 [
   {
     "id": "a255720a-8ce9-41a0-bfe8-a6a9e8828597",
-    "name": "موبایل apple",
+    "name": "موبایل apple 111",
     "price": "350000",
-    "quantity": "123"
+    "quantity": "333"
   },
   {
     "id": "4acf413f-ea6b-42df-9d14-4e21909048a4",
-    "name": "جارو برقی",
+    "name": "جارو برقی22",
     "price": "52000",
     "quantity": "33"
   },
@@ -88,11 +88,5 @@
     "name": "aaa",
     "price": "123",
     "quantity": "123"
-  },
-  {
-    "id": "490c820f-bb49-42a7-925c-77f374d81fdb",
-    "name": "zzz",
-    "price": "555",
-    "quantity": "333"
   }
 ]
