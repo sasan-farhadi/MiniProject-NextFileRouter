@@ -1,43 +1,39 @@
-import { useQuery } from "@tanstack/react-query"
 import styles from "./home.module.css"
-import allProducts from "../../services/products"
-import sp from "../../helper/number"
+import Link from "next/link"
 
-const HomePage = () => {
-    const { data } = useQuery(["get-products"], allProducts)
-    console.log(data)
+const HomePage = ({ data }) => {
     return (
-        <div>
-            {/* <div className={styles.titletext}>
+        <>
+            <div className={styles.titletext}>
                 <h2>لیست محصولات</h2>
             </div>
             <div className={styles.container}>
                 {
-                    data?.data.data.map(x => (
-                        <div key={x.id} className={styles.card}>
-                            <div className={styles.topsection}>
-                                <div className={styles.border}></div>
-                            </div>
-                            <div className={styles.bottomsection}>
-                                <span className={styles.title}>{x.name}</span>
-                                <div className={styles.row}>
-                                    <div className={styles.item}>
-                                        <span className={styles.bigtext}>{x.quantity}</span>
-                                        <span className={styles.regulartext}>موجودی</span>
-                                    </div>
-                                    <div className={styles.item}>
-                                        <span className={styles.bigtext}>{sp(x.price)}</span>
-                                        <span className={styles.regulartext}>تومان</span>
+                    data?.data.map(x => (
+                        <Link href={x.id} key={x.id} >
+                            <div className={styles.card}>
+                                <div className={styles.topsection}>
+                                    <div className={styles.border}></div>
+                                </div>
+                                <div className={styles.bottomsection}>
+                                    <span className={styles.title}>{x.name}</span>
+                                    <div className={styles.row}>
+                                        <div className={styles.item}>
+                                            <span className={styles.bigtext}>{x.quantity}</span>
+                                            <span className={styles.regulartext}>موجودی</span>
+                                        </div>
+                                        <div className={styles.item}>
+                                            <span className={styles.bigtext}>{x.price}</span>
+                                            <span className={styles.regulartext}>تومان</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 }
-
-            </div> */}
-        </div>
+            </div >
+        </>
     )
 }
-
 export default HomePage

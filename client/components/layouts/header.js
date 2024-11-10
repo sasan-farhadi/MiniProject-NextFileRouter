@@ -1,13 +1,14 @@
-import { getCookie, logoutHandler } from '../../utils/cookie'
+import { logoutHandler } from '../../utils/cookie'
 import styles from './header.module.css'
 import Link from "next/link"
 
-const Header =  () => {
-    const token =  getCookie("token")
+const Header = () => {
+    // const token = getCookie("token")
+    const token = true
 
     return (
         <>
-            <header className={styles.header}>
+            <div className={styles.header}>
                 {
                     token ? (
                         <>
@@ -21,7 +22,7 @@ const Header =  () => {
                         </>
                     )
                 }
-            </header>
+            </div>
         </>
     )
 }
