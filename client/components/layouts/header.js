@@ -2,15 +2,12 @@ import { logoutHandler } from '../../utils/cookie'
 import styles from './header.module.css'
 import Link from "next/link"
 
-const Header = () => {
-    // const token = getCookie("token")
-    const token = true
-
+const Header = ({ token }) => {
     return (
         <>
             <div className={styles.header}>
                 {
-                    token ? (
+                    !!token ? (
                         <>
                             <Link className={styles.profile} href="/admin">بخش کاربری</Link>
                             <Link onClick={logoutHandler} className={styles.exit} href="/">خروج</Link>

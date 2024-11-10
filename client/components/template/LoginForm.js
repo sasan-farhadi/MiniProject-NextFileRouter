@@ -11,7 +11,6 @@ import { useRouter } from "next/router"
 
 
 const LoginForm = () => {
-    const token = getCookie("token")
 
     const router = useRouter()
     const [form, setForm] = useState({ username: "", password: "" })
@@ -23,6 +22,12 @@ const LoginForm = () => {
 
     const loginHandler = async (e) => {
         e.preventDefault()
+
+        if (!username || !password) {
+            toast.error("نام کاربری و رمزعبور را وارد کنید")
+            return
+        }
+
         const { response, error } = await login(username, password)
         if (response) {
             toast.success("ورود با موفقیت انجام شد")
@@ -36,9 +41,6 @@ const LoginForm = () => {
 
     return (
         <>
-            {
-                token ? router.push("/admin") : ""
-            }
             <form className={styles.form} onChange={changeHanlder} onSubmit={loginHandler}>
                 <div>
                     <img src="logo.png" alt="" />

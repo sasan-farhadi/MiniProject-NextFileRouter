@@ -1,12 +1,21 @@
 import ProductsList from "../../components/template/ProductsList"
 import { useQuery } from "@tanstack/react-query"
 import { products } from "../../services/products"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AddProduct from "../../components/template/addProduct"
 import AdminHeader from "../../components/layouts/admin/header"
+import { useRouter } from "next/router"
 
 
-const Admin = () => {
+const Admin = ({ token }) => {
+
+    const router = useRouter()
+    useEffect(() => {
+        if (!token) {
+            router.push("/login")
+        }
+    }, [])
+
     const [selectPage, setSelectPage] = useState()
     const [showAddProductModal, setShowAddProductModal] = useState(null)
 
@@ -20,3 +29,11 @@ const Admin = () => {
     )
 }
 export default Admin
+
+
+export async function getServerSideProps(context) {
+    const token = context.req.headers.cookie || ""
+    return {
+        props: { token },
+    }
+}

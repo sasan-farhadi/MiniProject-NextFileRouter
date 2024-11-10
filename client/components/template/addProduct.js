@@ -17,6 +17,15 @@ const AddProduct = ({ setShowAddProductModal }) => {
     const submitHandler = e => {
         e.preventDefault()
 
+
+        if (!name || !quantity || !price) {
+            toast.error("اطلاعات را تکمیل کنید")
+            return
+        } else if (quantity <= 0 || price <= 0) {
+            toast.error("عدد نمی تواند صفر یا منفی باشد")
+            return
+        }
+
         mutate(form, {
             onSuccess: () => {
                 toast.success("محصول اضافه گردید")

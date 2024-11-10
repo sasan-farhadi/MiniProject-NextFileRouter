@@ -6,6 +6,7 @@ import { register } from "../../services/auth"
 import { useRouter } from "next/router"
 
 import toast, { Toaster } from "react-hot-toast"
+import { enRegex } from "../../helper/regex"
 const RegisterForm = () => {
     const router = useRouter()
     const [form, setForm] = useState({ username: "", password: "", repassword: "" })
@@ -18,6 +19,19 @@ const RegisterForm = () => {
 
     const submitHandler = e => {
         e.preventDefault()
+
+        if (!form.username || !form.password) {
+            toast.error("اطلاعات را تکمیل کنید")
+            return
+        }
+        if (!enRegex.test(form.username)) {
+            toast.error("نام کاربری باید حروف لاتین باشد")
+            return
+        } else if (form.password !== form.repassword) {
+            toast.error("رمز عبور یکسان نیست")
+            return
+        }
+
 
         mutate(form, {
             onSuccess: () => {
